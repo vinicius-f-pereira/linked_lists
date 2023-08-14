@@ -6,7 +6,7 @@
 /*   By: vde-frei <vde-frei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 10:32:33 by vde-frei          #+#    #+#             */
-/*   Updated: 2023/08/14 10:41:27 by vde-frei         ###   ########.fr       */
+/*   Updated: 2023/08/14 17:31:57 by vde-frei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	insert_end(Node **root, int value)
 	 * allocate the node, so you need to protect it
 	 */
 	if (new_node == NULL)
-		exit (1);
+		exit (1); //is the same thing to just 'return ;' but say do main the error code 1.
 	new_node->next = NULL;
 	new_node->x = value;
 }
