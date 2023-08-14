@@ -6,7 +6,7 @@
 /*   By: vde-frei <vde-frei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 10:32:33 by vde-frei          #+#    #+#             */
-/*   Updated: 2023/08/14 17:31:57 by vde-frei         ###   ########.fr       */
+/*   Updated: 2023/08/14 18:47:45 by vde-frei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ typedef struct s_node
  * the end of node's list.
  */
 
-void	insert_end(Node **root, int value)
+void	insert_end(t_node **root, int value)
 {
 	t_node	*new_node = malloc(sizeof(t_node));
 	/**
@@ -40,18 +40,47 @@ void	insert_end(Node **root, int value)
 		exit (1); //is the same thing to just 'return ;' but say do main the error code 1.
 	new_node->next = NULL;
 	new_node->x = value;
+
+	/**
+	 * now we need to make this go to the last node
+	 * so we need to implement a loop to verify when
+	 * we are at the last node and insert it there.
+	 */
+
+	t_node *current = *root;
+	while (current->next != NULL)
+	{
+		current = current->next;
+	}
+	/**
+	 * after run through all list (nodes)
+	 * we need to end current node with new_node
+	 * that keeps '->next = NULL'
+	 */
+	current->next = new_node;
 }
 int	main(int argc, char *argv[])
 {
-	t_node	root;
+	/**
+	 * change the way that it's write to improve code
+	 * need to reference root with pointer and arguments of
+	 * the struct with arrows and malloc root with size of t_node
+	 * difference between dot and arrow is that arrows also derreference the pointer
+	 * and dot you just get the struct member from a variable that is not a pointer
+	 */
+	t_node	*root;
+	
+	root = malloc(sizeof(t_node));
+	if (root == NULL)
+		exit (2);
+	root->x = 15;
+	root->next = NULL;
 
-	root.x = 15;
-	root.next = malloc(sizeof(t_node));
-	root.next->x = -2;
-	root.next->next = malloc(sizeof(t_node));
-	root.next->next->x = 22;
-	root.next->next->next = NULL;
-	free (root.next->next);
-	free (root.next);
+	insert_end(&root, -2);
+	insert_end(&root, -11);
+	for (t_node *current = root; current != NULL; current = current->next)
+	{
+		printf("%d\n", current->x);
+	}
 	return (0);
 }
