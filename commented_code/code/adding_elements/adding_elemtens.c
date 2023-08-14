@@ -6,7 +6,7 @@
 /*   By: vde-frei <vde-frei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 10:32:33 by vde-frei          #+#    #+#             */
-/*   Updated: 2023/08/14 18:47:45 by vde-frei         ###   ########.fr       */
+/*   Updated: 2023/08/14 18:58:47 by vde-frei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,17 @@ void	insert_end(t_node **root, int value)
 	new_node->next = NULL;
 	new_node->x = value;
 
+	/**
+	* verify if root isn't a NULL pointer
+	* if root is a new pointer, make it point to new_node
+	* if you try add something without this step, you code will crash
+	* this need to point and change an address, if it's null, you'll 
+	* get an error!
+	*/
+	if (*root == NULL)
+	{
+		*root = new_node;
+	}
 	/**
 	 * now we need to make this go to the last node
 	 * so we need to implement a loop to verify when
@@ -83,4 +94,4 @@ int	main(int argc, char *argv[])
 		printf("%d\n", current->x);
 	}
 	return (0);
-}
+	}
